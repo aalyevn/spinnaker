@@ -1,0 +1,11 @@
+imagePullSecrets: 
+  name: docker-secret
+
+nginx:
+  enable: true
+  replicas: 1
+  image: nginx
+  service:
+    type: NodePort
+    port: 80
+    nodePort: 30895

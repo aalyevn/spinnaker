@@ -1,0 +1,19 @@
+{{- if .Values.nginx.enable }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: {{ .Values.nginx.replicas }}
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: {{ .Values.nginx.image }}:{{ default "latest" .Values.nginx.tag }}
+{{- end }}
