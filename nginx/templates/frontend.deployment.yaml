@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: nginx
 spec:
-  replicas: {{ .Values.nginx.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       app: nginx
@@ -15,5 +15,5 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: {{ .Values.nginx.image }}:{{ default "latest" .Values.nginx.tag }}
+        image: nginx:latest
 {{- end }}

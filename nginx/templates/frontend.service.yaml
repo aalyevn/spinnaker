@@ -4,11 +4,11 @@ kind: Service
 metadata:
   name: nginx2
 spec:
-  type: {{ .Values.nginx.service.type }}
+  type: NodePort
   ports:
-    - port: {{ .Values.nginx.service.port }}
-      targetPort: {{ .Values.nginx.service.port }}
-      nodePort: {{ .Values.nginx.service.nodePort }}
+    - port: 80
+      targetPort: 80
+      nodePort: 30895
       protocol: TCP
       name: http
   selector:
