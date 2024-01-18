@@ -38,8 +38,12 @@ jobs:
           mkdir ~/.spin/
           echo "${{ secrets.CONFIG_SPIN }}" | tr -d '\r' > ~/.spin/config
 
-      - name: Export config spin
+      - name: Update pipeline
         run: |
           export NAME_VAR=${{ steps.vars.outputs.sha_short }}
           envsubst < pipeline.json > output.json
           spin pipeline save --file output.json
+
+      - name: Start pipeline
+        run: |
+          curl -X POST http://95.215.246.23:8084/webhooks/webhook/nginxtest -H 'Content-type: application/json' -d "{ }"
