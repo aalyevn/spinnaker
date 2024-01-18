@@ -76,7 +76,7 @@
    "moniker": {
     "app": "nginx1"
    },
-   "name": "Deploy (Semen)",
+   "name": "Deploy (${NAME_VAR})",
    "refId": "1",
    "requisiteStageRefIds": [],
    "skipExpressionEvaluation": false,
