@@ -32,6 +32,6 @@ jobs:
       - name: Export config spin
         run: |
           mkdir ~/.spin/
-          echo ${{ secret.CONFIG_SPIN }} > ~/.spin/config
+          echo ${{ secrets.CONFIG_SPIN }} > ~/.spin/config
           cat ~/.spin/config
           spin -v
