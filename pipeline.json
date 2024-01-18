@@ -1,0 +1,96 @@
+{
+ "application": "nginx1",
+ "id": "523d26c3-9b20-4859-be9b-36c42f18f077",
+ "index": 0,
+ "keepWaitingPipelines": false,
+ "lastModifiedBy": "anonymous",
+ "limitConcurrent": true,
+ "name": "nginxdeploy",
+ "schema": "1",
+ "spelEvaluator": "v4",
+ "stages": [
+  {
+   "account": "my-k8s",
+   "cloudProvider": "kubernetes",
+   "manifests": [
+    {
+     "apiVersion": "v1",
+     "kind": "Service",
+     "metadata": {
+      "name": "nginx-svc",
+      "namespace": "default"
+     },
+     "spec": {
+      "ports": [
+       {
+        "name": "http",
+        "nodePort": 32003,
+        "port": 80,
+        "protocol": "TCP",
+        "targetPort": 80
+       }
+      ],
+      "selector": {
+       "app": "backend"
+      },
+      "type": "NodePort"
+     }
+    },
+    {
+     "apiVersion": "apps/v1",
+     "kind": "Deployment",
+     "metadata": {
+      "name": "nginx-project",
+      "namespace": "default"
+     },
+     "spec": {
+      "replicas": 1,
+      "selector": {
+       "matchLabels": {
+        "app": "nginx-project"
+       }
+      },
+      "template": {
+       "metadata": {
+        "labels": {
+         "app": "nginx-project"
+        }
+       },
+       "spec": {
+        "containers": [
+         {
+          "image": "nginx:1.17.3",
+          "name": "nginx",
+          "ports": [
+           {
+            "containerPort": 80
+           }
+          ]
+         }
+        ]
+       }
+      }
+     }
+    }
+   ],
+   "moniker": {
+    "app": "nginx1"
+   },
+   "name": "Deploy (Semen)",
+   "refId": "1",
+   "requisiteStageRefIds": [],
+   "skipExpressionEvaluation": false,
+   "source": "text",
+   "trafficManagement": {
+    "enabled": false,
+    "options": {
+     "enableTraffic": false,
+     "services": []
+    }
+   },
+   "type": "deployManifest"
+  }
+ ],
+ "triggers": [],
+ "updateTs": "1705416431995"
+}
