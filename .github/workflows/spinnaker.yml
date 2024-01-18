@@ -21,6 +21,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+
+      - name: Set outputs
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       
       - name: Install spin cli
         run: |
@@ -33,5 +37,8 @@ jobs:
         run: |
           mkdir ~/.spin/
           echo "${{ secrets.CONFIG_SPIN }}" | tr -d '\r' > ~/.spin/config
-          cat ~/.spin/config
-          spin -v
+
+      - name: Export config spin
+        run: |
+          export NAME_VAR=${{ steps.vars.outputs.sha_short }}
+          spin pipeline save --file pipeline.json
