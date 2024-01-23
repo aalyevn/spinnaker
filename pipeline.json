@@ -1,84 +1,88 @@
 {
-  "keepWaitingPipelines": false,
-  "lastModifiedBy": "anonymous",
-  "limitConcurrent": true,
-  "schema": "1",
-  "spelEvaluator": "v4",
-  "stages": [
+ "application": "nginx1",
+ "id": "523d26c3-9b20-4859-be9b-36c42f18f077",
+ "index": 0,
+ "keepWaitingPipelines": false,
+ "lastModifiedBy": "anonymous",
+ "limitConcurrent": true,
+ "name": "nginxdeploy",
+ "schema": "1",
+ "spelEvaluator": "v4",
+ "stages": [
+  {
+   "expectedArtifacts": [
     {
-      "expectedArtifacts": [
-        {
-          "defaultArtifact": {
-            "customKind": true,
-            "id": "973ab673-41de-4118-a298-10ae19b768c7"
-          },
-          "displayName": "rude-bear-50",
-          "id": "e815ae12-a2bb-4d6a-bfa6-4da0b6759917",
-          "matchArtifact": {
-            "artifactAccount": "embedded-artifact",
-            "customKind": false,
-            "id": "e5f8fffd-63d2-4058-9014-6b6b9817e3cc",
-            "name": "nginx1",
-            "type": "embedded/base64"
-          },
-          "useDefaultArtifact": false,
-          "usePriorArtifact": false
-        }
-      ],
-      "helmChartFilePath": "nginx",
-      "inputArtifacts": [
-        {
-          "account": "demo-gitrepo-artifact",
-          "artifact": {
-            "artifactAccount": "demo-gitrepo-artifact",
-            "id": "bb48836a-7504-4f2d-b676-ec7b0feb6cff",
-            "location": "nginx",
-            "reference": "https://github.com/DawnBreather/spinnaker-poc.git",
-            "type": "git/repo",
-            "version": "main"
-          }
-        }
-      ],
-      "name": "Bake (Manifest)",
-      "namespace": "default",
-      "outputName": "nginx1",
-      "overrides": {},
-      "refId": "1",
-      "requisiteStageRefIds": [],
-      "templateRenderer": "HELM3",
-      "type": "bakeManifest"
-    },
-    {
-      "account": "my-k8s",
-      "cloudProvider": "kubernetes",
-      "manifestArtifactId": "e815ae12-a2bb-4d6a-bfa6-4da0b6759917",
-      "moniker": {
-        "app": "nginx1"
-      },
-      "name": "Deploy (${NAME_VAR})",
-      "namespaceOverride": "default",
-      "refId": "2",
-      "requisiteStageRefIds": [
-        "1"
-      ],
-      "skipExpressionEvaluation": false,
-      "source": "artifact",
-      "trafficManagement": {
-        "enabled": false,
-        "options": {
-          "enableTraffic": false,
-          "services": []
-        }
-      },
-      "type": "deployManifest"
+     "defaultArtifact": {
+      "customKind": true,
+      "id": "973ab673-41de-4118-a298-10ae19b768c7"
+     },
+     "displayName": "rude-bear-50",
+     "id": "e815ae12-a2bb-4d6a-bfa6-4da0b6759917",
+     "matchArtifact": {
+      "artifactAccount": "embedded-artifact",
+      "customKind": false,
+      "id": "e5f8fffd-63d2-4058-9014-6b6b9817e3cc",
+      "name": "nginx1",
+      "type": "embedded/base64"
+     },
+     "useDefaultArtifact": false,
+     "usePriorArtifact": false
     }
-  ],
-  "triggers": [
+   ],
+   "helmChartFilePath": "nginx",
+   "inputArtifacts": [
     {
-      "enabled": true,
-      "source": "nginxtest",
-      "type": "webhook"
+     "account": "demo-gitrepo-artifact",
+     "artifact": {
+      "artifactAccount": "demo-gitrepo-artifact",
+      "id": "bb48836a-7504-4f2d-b676-ec7b0feb6cff",
+      "location": "nginx",
+      "reference": "https://github.com/DawnBreather/spinnaker-poc.git",
+      "type": "git/repo",
+      "version": "main"
+     }
     }
-  ],
-  "updateTs": "1706000979751"
+   ],
+   "name": "Bake (Manifest)",
+   "namespace": "default",
+   "outputName": "nginx1",
+   "overrides": {},
+   "refId": "1",
+   "requisiteStageRefIds": [],
+   "templateRenderer": "HELM3",
+   "type": "bakeManifest"
+  },
+  {
+   "account": "my-k8s",
+   "cloudProvider": "kubernetes",
+   "manifestArtifactId": "e815ae12-a2bb-4d6a-bfa6-4da0b6759917",
+   "moniker": {
+    "app": "nginx1"
+   },
+   "name": "Deploy (${NAME_VAR})",
+   "namespaceOverride": "default",
+   "refId": "2",
+   "requisiteStageRefIds": [
+    "1"
+   ],
+   "skipExpressionEvaluation": false,
+   "source": "artifact",
+   "trafficManagement": {
+    "enabled": false,
+    "options": {
+     "enableTraffic": false,
+     "services": []
+    }
+   },
+   "type": "deployManifest"
+  }
+ ],
+ "triggers": [
+  {
+   "enabled": true,
+   "source": "nginxtest",
+   "type": "webhook"
+  }
+ ],
+ "updateTs": "1706000979751"
 }
