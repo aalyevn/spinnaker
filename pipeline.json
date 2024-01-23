@@ -55,7 +55,7 @@
       "moniker": {
         "app": "nginx1"
       },
-      "name": "Deploy (Manifest)",
+      "name": "Deploy (${NAME_VAR})",
       "namespaceOverride": "default",
       "refId": "2",
       "requisiteStageRefIds": [
