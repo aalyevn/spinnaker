@@ -46,4 +46,4 @@ jobs:
 
       - name: Start pipeline
         run: |
-          curl -X POST http://95.215.246.23:8084/webhooks/webhook/nginxtest -H 'Content-type: application/json' -d "{ }"
+          spin pipeline execute --name nginxdeploy --application nginx1
